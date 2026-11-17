@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#101a22" />
+  <title>Dropzone — Neon Break</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main id="app">
+    <canvas id="game" aria-label="Dropzone game arena"></canvas>
+    <div class="vignette"></div>
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Dropzone home"><span class="brand-mark">D<span>↗</span></span><span class="brand-name">DROPZONE<small>NEON BREAK</small></span></a>
+      <div class="season-tag"><i></i> SEASON 04 <b>·</b> LIVE</div>
+      <div class="top-actions"><button class="icon-btn" id="soundBtn" title="Toggle sound">♫</button><button class="profile" id="profileButton"><span class="avatar-mini">R</span><span>Rookie<span class="online-dot"></span></span><b>⌄</b></button></div>
+    </header>
+
+    <section class="home-panel" id="homePanel">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="pulse"></span> THE ISLAND IS LIVE</p>
+        <h1>DROP IN.<br><em>RISE UP.</em></h1>
+        <p class="hero-desc">One island. Twelve rivals. Find your edge and be the last one standing.</p>
+        <div class="hero-actions"><button class="play-button" id="playButton"><span>▶</span><span>DEPLOY NOW<small>SOLO · ZERO BUILD</small></span><b>↗</b></button><button class="skin-button" id="skinButton"><span class="skin-icon">✦</span><span>CHANGE OUTFIT<small>ALL OUTFITS FREE</small></span></button></div>
+        <div class="quick-stats"><span><b>12</b> PLAYERS</span><i></i><span><b>1</b> LAST STANDING</span><i></i><span><b>∞</b> FREE LOOT</span></div>
+      </div>
+      <div class="event-card"><div class="event-top"><span class="event-live"><i></i> ISLAND EVENT</span><span>04 / 09</span></div><div class="event-title">THE<br><strong>NEON<br>FRONTIER</strong></div><div class="event-line"></div><p>Storm's closing. Make your move.</p><div class="event-bottom"><span>NEW DROP ZONE</span><span class="arrow-round">↗</span></div></div>
+      <div class="news-card"><span class="news-label">FIELD REPORT <span>NEW</span></span><b>Fresh gear just landed</b><p>Pulse rifles, shield packs and three new looks. All free. All yours.</p><span class="news-link">READ THE BRIEF <b>→</b></span></div>
+      <div class="bottom-hint"><span class="keycap">W</span><span class="keycap">A</span><span class="keycap">S</span><span class="keycap">D</span> MOVE <span class="hint-sep">·</span><span class="mouse-icon">⌖</span> AIM &amp; FIRE <span class="hint-sep">·</span><span class="keycap wide">SPACE</span> DODGE</div>
+    </section>
+
+    <section class="game-hud hidden" id="gameHud">
+      <div class="match-status"><div class="status-pill"><span class="live-dot"></span> LIVE MATCH</div><div class="phase-label" id="phaseLabel">STORM CLOSING IN</div><div class="storm-timer" id="stormTimer">00:18</div></div>
+      <div class="match-stats"><div class="stat-box"><span class="stat-icon players-icon">♟</span><span><b id="playersLeft">12</b><small>ALIVE</small></span></div><div class="stat-box"><span class="stat-icon kill-icon">✕</span><span><b id="killCount">0</b><small>ELIMS</small></span></div></div>
+      <div class="minimap-frame"><canvas id="minimap" width="156" height="156"></canvas><span class="map-label">NEON ISLAND <b>↗</b></span></div>
+      <div class="feed" id="killFeed"></div>
+      <div class="crosshair-hint" id="crosshairHint"><span>CLICK TO LOCK IN</span></div>
+      <div class="player-hud"><div class="health-row"><span class="health-icon">✚</span><div class="bar-wrap"><div class="bar health-bar" id="healthBar"></div></div><b id="healthText">100</b></div><div class="health-row shield-row"><span class="shield-icon">⬟</span><div class="bar-wrap"><div class="bar shield-bar" id="shieldBar"></div></div><b id="shieldText">50</b></div></div>
+      <div class="weapon-hud"><div class="ammo-display"><span class="weapon-name" id="weaponName">PULSE AR</span><strong id="ammoCount">30 <i>/ 120</i></strong><div class="weapon-meta"><span id="weaponRarity">◆ UNCOMMON</span><span id="reloadLabel"></span></div></div><div class="weapon-slots" id="weaponSlots"></div></div>
+      <div class="control-tip"><kbd>WASD</kbd> MOVE <kbd>SHIFT</kbd> SPRINT <kbd>SPACE</kbd> DODGE <kbd>R</kbd> RELOAD</div>
+      <button class="exit-game" id="exitButton">Ⅱ <span>EXIT</span></button>
+      <div class="touch-controls" id="touchControls"><div class="touch-stick" id="touchStick"><i></i></div><button id="touchFire">FIRE</button><button id="touchDodge">DODGE</button></div>
+    </section>
+
+    <section class="skin-modal hidden" id="skinModal"><div class="modal-backdrop"></div><div class="modal-card"><button class="modal-close" id="closeSkin">×</button><p class="eyebrow">YOUR STYLE. YOUR DROP.</p><h2>CHOOSE YOUR<br><em>OUTFIT</em></h2><p class="modal-sub">Every look is free. Pick your favorite.</p><div class="skin-grid" id="skinGrid"></div><button class="confirm-skin" id="confirmSkin">EQUIP OUTFIT <span>→</span></button></div></section>
+    <section class="end-screen hidden" id="endScreen"><div class="end-card"><p class="eyebrow" id="endEyebrow">MATCH COMPLETE</p><h2 id="endTitle">NICE RUN.</h2><p id="endMessage">You made it count.</p><div class="end-stats"><div><b id="endKills">0</b><small>ELIMINATIONS</small></div><div><b id="endTime">00:00</b><small>TIME SURVIVED</small></div></div><button class="play-button replay-button" id="replayButton"><span>↻</span><span>DROP AGAIN<small>THE ISLAND IS WAITING</small></span><b>↗</b></button><button class="back-home" id="backHome">BACK TO LOBBY</button></div></section>
+    <div class="toast" id="toast"></div>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>
